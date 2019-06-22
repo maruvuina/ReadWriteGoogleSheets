@@ -1,0 +1,14 @@
+Faculty of Mechanics and Mathematics
+Departments--------->Number of employees
+
+Bio- and Nano- mechanics---------->5
+Web technologies and Computer modeling---------->36
+Higher algebra and Information security---------->11
+Geometry, Topology and Methods of teaching mathematics---------->12
+Differential Equations and Systems Analysis---------->14
+Mathematical Cybernetics---------->12
+General Mathematics and Computer Science---------->28
+Theoretical and applied mechanics---------->20
+Theory of Functions---------->22
+Functional Analysis and Analytical Economics---------->16
+Information Technology Training Center---------->13
