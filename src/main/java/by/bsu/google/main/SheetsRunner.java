@@ -5,8 +5,8 @@ import by.bsu.google.action.SheetsGoogle;
 import java.io.IOException;
 import java.util.List;
 
-
 public class SheetsRunner {
+
     public static void main(String[] args) {
         List<List<Object>> lists;
         try {

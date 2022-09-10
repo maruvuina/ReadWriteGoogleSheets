@@ -14,18 +14,20 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SheetsGoogle {
+
     private static Sheets sheetsService;
+
     private static final String SPREADSHEET_ID = "19LiTF2ZjIBBn-v9YspiVFAW5j_e7PvMJCAx8XIZwDDs";
 
     public static Sheets getSheetsService() {
         return sheetsService;
     }
 
+    private SheetsGoogle() {}
 
     public static void setUp() throws GeneralSecurityException, IOException {
         SheetsGoogle.sheetsService = SheetsService.getSheetsService();
     }
-
 
     public static List<List<Object>> readToSheet() throws IOException {
         try {
@@ -39,12 +41,9 @@ public class SheetsGoogle {
         ValueRange response = service.spreadsheets().values()
                 .get(SPREADSHEET_ID, range)
                 .execute();
-        List<List<Object>> values = response.getValues();
 
-        return values;
-
+        return response.getValues();
     }
-
 
     public static void writeToSheet() throws IOException {
         try {
@@ -55,14 +54,16 @@ public class SheetsGoogle {
         ValueRange body = new ValueRange();
         body.setValues(
                 Arrays.asList(
-                        Arrays.asList((Object)"books", "30"),
-                        Arrays.asList((Object)"pens", "10"),
-                        Arrays.asList((Object)"clothes", "20"),
-                        Arrays.asList((Object)"shoes", "5")));
+                        Arrays.asList("books", "30"),
+                        Arrays.asList("pens", "10"),
+                        Arrays.asList("clothes", "20"),
+                        Arrays.asList("shoes", "5")));
 
-        UpdateValuesResponse result = sheetsService.spreadsheets().values().update(SPREADSHEET_ID, "A13", body).setValueInputOption("RAW").execute();
+        UpdateValuesResponse result = sheetsService.spreadsheets().values()
+                .update(SPREADSHEET_ID, "A13", body)
+                .setValueInputOption("RAW").execute();
+        System.out.println("Result: " + result);
     }
-
 
     public static void writeToFile(List<List<Object>> values) throws IOException {
         File file = new File("output.txt");
@@ -72,8 +73,8 @@ public class SheetsGoogle {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
         if (values == null || values.isEmpty()) {
             System.out.println("No data found.");
@@ -85,7 +86,8 @@ public class SheetsGoogle {
         bufferedWriter.newLine();
         bufferedWriter.write("Departments--------->Number of employees");
         bufferedWriter.newLine();
-        for (List row : values) {
+
+        for (List<Object> row : values) {
             // Print columns A and B, which correspond to indices 0 and 1.
             System.out.printf("%3s | %4s\n", row.get(0), row.get(1));
             bufferedWriter.newLine();

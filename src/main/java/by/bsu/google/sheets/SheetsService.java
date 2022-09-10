@@ -10,8 +10,12 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 
 public class SheetsService {
+
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
+
     private static final String APPLICATION_NAME = "Google Sheets API";
+
+    private SheetsService() {}
 
     public static Sheets getSheetsService() throws IOException, GeneralSecurityException {
         Credential credential = GoogleAuthorize.getCredential();
